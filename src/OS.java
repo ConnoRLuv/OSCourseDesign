@@ -12,7 +12,7 @@ public class OS {
      * @param process 为分页的进程分配内存
      *                每次分配进程一半的页
      */
-    public static void Distribute(PCB process) {
+    public static void DistributePage(PCB process) {
         Random random = new Random();
         int temp;
         for (int i = 0; i < process.PageMappingTable.size() / 2; i++) {
@@ -29,4 +29,23 @@ public class OS {
 
     }
 
+    public static void DIstributeSegmentPage(PCB process) {
+        Random random = new Random();
+        int temp;
+        for (Segment segment :
+                process.SegmentTable) {
+            for (int i = 0; i < segment.pages.size(); i++) {
+                do {
+                    temp = random.nextInt(Memory.pages.size());
+                } while (Memory.pages.get(temp).getPageNo() != -1);
+                Memory.pages.get(temp).setPageNo(i);
+                Memory.pages.get(temp).setInterruptBit(0);
+                Memory.pages.get(temp).setProcessNam(process.getProcessName());
+                segment.pages.remove(i);
+                segment.pages.add(i, Memory.pages.get(temp));
+
+            }
+        }
+
+    }
 }
