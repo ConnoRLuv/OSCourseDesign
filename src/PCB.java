@@ -11,10 +11,13 @@ public class PCB {
     private String processName;
     List<Page> PageMappingTable;
     List<Page> TLB;
+    List<Segment> SegmentTable;
+    int segmentBits;
 
     public PCB(String processName, int size) {
         setProcessSize(size);
         setProcessName(processName);
+
         PageMappingTable = new ArrayList<>();
         TLB = new ArrayList<>();
 
@@ -29,6 +32,36 @@ public class PCB {
             page.setPageNo(i);
             PageMappingTable.add(page);
         }
+
+    }
+
+    public PCB(String processName, int processSize, HashMap<String, Integer> segmentSize) {
+        setProcessSize(processSize);
+        setProcessName(processName);
+        SegmentTable = new ArrayList<>();
+        for (String segmentNam :
+                segmentSize.keySet()) {
+            SegmentTable.add(new Segment(segmentNam, segmentSize.get(segmentNam)));
+        }
+        for (Segment segment :
+                SegmentTable) {
+            int tmpPageNum;
+            if (segment.getSegmentSize() % Memory.getPageSize() == 0) {
+                tmpPageNum = segment.getSegmentSize() / Memory.getPageSize();
+            } else
+                tmpPageNum = segment.getSegmentSize() / Memory.getPageSize() + 1;
+
+            for (int i = 0; i < tmpPageNum; i++) {
+                Page page = new Page();
+                page.setPageNo(i);
+                segment.pages.add(page);
+            }
+        }
+        segmentBits = Integer.toBinaryString(segmentSize.size() - 1).length();
+    }
+
+    public int getSegmentBits() {
+        return segmentBits;
     }
 
     public String getProcessName() {
