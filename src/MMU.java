@@ -16,28 +16,9 @@ public class MMU {
                     "1000", "1001", "1010", "1011",
                     "1100", "1101", "1110", "1111"};
 
-    static {
-        Hex2BinMap = new HashMap<>();
-        Hex2BinMap.put("0", binaryArray[0]);
-        Hex2BinMap.put("1", binaryArray[1]);
-        Hex2BinMap.put("2", binaryArray[2]);
-        Hex2BinMap.put("3", binaryArray[3]);
-        Hex2BinMap.put("4", binaryArray[4]);
-        Hex2BinMap.put("5", binaryArray[5]);
-        Hex2BinMap.put("6", binaryArray[6]);
-        Hex2BinMap.put("7", binaryArray[7]);
-        Hex2BinMap.put("8", binaryArray[8]);
-        Hex2BinMap.put("9", binaryArray[9]);
-        Hex2BinMap.put("A", binaryArray[10]);
-        Hex2BinMap.put("B", binaryArray[11]);
-        Hex2BinMap.put("C", binaryArray[12]);
-        Hex2BinMap.put("D", binaryArray[13]);
-        Hex2BinMap.put("E", binaryArray[14]);
-        Hex2BinMap.put("F", binaryArray[15]);
-        binaryString = "";
-    }
 
     public static int Page(PCB process, String hexString) {
+        binaryString = "";
         String[] hexArray = hexString.split("");
         for (String hex :
                 hexArray) {
