@@ -60,6 +60,7 @@ public class PCB {
         segmentBits = Integer.toBinaryString(segmentSize.size() - 1).length();
     }
 
+
     public int getSegmentBits() {
         return segmentBits;
     }
@@ -84,4 +85,6 @@ public class PCB {
     public String toString() {
         return getProcessName();
     }
+
+
 }

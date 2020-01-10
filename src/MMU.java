@@ -49,7 +49,7 @@ public class MMU {
         binaryString = binaryString.substring(Memory.getPageBits());
         int pageFrameNum = process.PageMappingTable.get(pageNum).getPageFrameNum();
         binaryString = Integer.toBinaryString(pageFrameNum) + binaryString;
-        printResult(Integer.toHexString(Integer.parseInt(binaryString, 2)));
+        printResult(Integer.parseInt(binaryString, 2));
 
         return 1;
 
@@ -60,7 +60,7 @@ public class MMU {
         String segmentNo = Integer.toBinaryString(addr.get(0));
         String pageNo = Integer.toBinaryString(addr.get(1));
 
-        if (addr.get(0) >= process.SegmentTable.size()) {
+        if (addr.get(0) == -1) {
             printError("段越界中断");
             return -1;
         }
@@ -98,13 +98,21 @@ public class MMU {
             }
         }
         binaryString += temp;
-        printResult(Integer.toHexString(Integer.parseInt(binaryString, 2)));
+        printResult(Integer.parseInt(binaryString, 2));
         return 1;
 
     }
 
-    private static void printResult(String string) {
-        System.out.println(string);
+    private static void printResult(int result) {
+        binaryString = Integer.toBinaryString(result);
+        if (binaryString.length() < Memory.getMemoryBits()) {
+            int length = binaryString.length();
+            for (int i = 0; i < Memory.getMemoryBits() - length; i++) {
+                binaryString = "0" + binaryString;
+            }
+        }
+        System.out.println(">二进制地址为：" + binaryString);
+        System.out.println(">十六进制地址为：" + Integer.toHexString(result));
     }
 
     private static void printError(String string) {
