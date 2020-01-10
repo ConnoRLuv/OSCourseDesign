@@ -1,3 +1,4 @@
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,8 +12,24 @@ public class Memory {
     private static int pageBits;
 
     static {
-        new Memory(65536, 1024);
+
+        try {
+            InputStream is = new FileInputStream("src/memory");
+            BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+            int memorySize = 0, pageSize = 0;
+            String line;
+            while ((line = reader.readLine()) != null) {
+                memorySize = Integer.parseInt(line.split(" ")[0]);
+                pageSize = Integer.parseInt(line.split(" ")[1]);
+            }
+            new Memory(memorySize, pageSize);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
     }
+
 
     public Memory(int memorySize, int pageSize) {
         Memory.memorySize = memorySize;
