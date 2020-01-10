@@ -2,13 +2,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Segment {
-    private String segmentNam;
+    private String segmentName;
     private int segmentNum;
     private int segmentSize;
     List<Page> pages;
 
-    public Segment(String segmentNam, int segmentSize) {
-        this.segmentNam = segmentNam;
+    public Segment(String segmentName, int segmentSize) {
+        this.segmentName = segmentName;
         this.segmentSize = segmentSize;
         pages = new ArrayList<>();
     }
@@ -21,12 +21,12 @@ public class Segment {
         this.segmentSize = segmentSize;
     }
 
-    public String getSegmentNam() {
-        return segmentNam;
+    public String getSegmentName() {
+        return segmentName;
     }
 
-    public void setSegmentNam(String segmentNam) {
-        this.segmentNam = segmentNam;
+    public void setSegmentName(String segmentName) {
+        this.segmentName = segmentName;
     }
 
     public int getSegmentNum() {
