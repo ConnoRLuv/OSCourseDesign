@@ -32,8 +32,8 @@ public class Memory {
 
 
     public Memory(int memorySize, int pageSize) {
-        Memory.memorySize = memorySize;
-        Memory.pageSize = pageSize;
+        setMemorySize(memorySize);
+        setPageSize(pageSize);
         pages = new ArrayList<>();
         int tmpPageNum;
         if (memorySize % pageSize == 0) {
